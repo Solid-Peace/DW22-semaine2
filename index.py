@@ -1,19 +1,20 @@
+from consolemenu import ConsoleMenu
+from consolemenu.items import MenuItem
 
 
-def menu():
-    entries = ['1. Lecture des donnees depuis un fichier',
-               '2. Ajouter un etudiant', '3. Ajouter une note',
-               '4. Afficher les notes d\'un etudiant',
-               '5. Afficher les notes triees d\'un cours',
-               '6. Supprimer un cours', '7. Sauvegarde des donnees dans un fichier',
-               '8. Quitter']
+menu = ConsoleMenu("Etudiants - Cours - Notes")
 
-    for menuEntry in entries:
-        print(menuEntry)
+menuItems = [
+    "Lecture des donnees depuis un fichier",
+    "Ajouter un etudiant", "Ajouter un note",
+    "Afficher les notes d\'un etudiant",
+    "Afficher les notes triees d\'un cours",
+    "Supprimer un cours",
+    "Sauvegarde des donees dans un fichier",
+]
 
-    choice = input('Votre choix: ')
+for menuItem in menuItems:
+    menu.append_item(MenuItem(menuItem))
 
-    print(choice)
 
-
-menu()
+menu.show()

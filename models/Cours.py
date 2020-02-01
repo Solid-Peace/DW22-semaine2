@@ -1,45 +1,46 @@
-''' Classe Etudiant '''
+''' Classe Cours '''
 from Note import Note
-from Etudiant import Etudiant
 
 class Cours:
     """
-        cours = Cours('nom du cours')
-        cours._notes = toutes les notes du cours
-        cours._etudiants => tous les etudiants inscrits
-            a ce cours (list obj)
-        cours._notes => toutes les notes de ce cours (list obj)
-
-        Cours._cours_instances =>
-            Toutes les insctance de cette classe (list obj)
+        docstring for ClassName
+        ####
+        #
+        # _etudiants_instances et _cours_instances
+        #
+        # servent de systeme de pointeur afin de pouvoir
+        # faire reference a un objet ou bien a l'instancier
+        # via une chaine de caractere
+        #
+        # Ayant pour objectif de simplifier le programme
+        #
+        # _etudiants_instances => { nom_de_instance : emplacement memoire }
+        #
+        #
+        ####
     """
-    _cours_instances = [] # static
+    _cours_instances = {} # static
 
     def __init__(self, nom_cours):
         self.nom_cours = nom_cours
-        self._notes = []
-        self._etudiants = []
-        Cours._cours_instances.append(self)
-
-    def __str__(self):
-        nb_etudiants = len(self._etudiants)
-        return "%s (%d etudiants inscrits)" %(self.nom_cours, nb_etudiants)
+        # Dict etudiant => [notes] de ce cours
+        self._etudiants_notes = {}
+        # On stock l'emplacement memoire de chaque instance
+        Cours._cours_instances[self.nom_cours] = self
 
     def add_etudiant(self, etudiant):
         """Ajout d'une instance etudiant a la liste des etudiants participant au cours"""
-        if not isinstance(etudiant, Etudiant):
-            raise ValueError('first parameter must be instance of Etudiant <class>')
-        self._etudiants.append(etudiant)
-        etudiant.add_cours(self)
+        self._etudiants_notes[etudiant.identifiant] = []
 
-    def add_notes(self, note):
-        if not isinstance(note, Note):
-            raise ValueError('first parameter must be instance of Note <class>')
-        self._notes.append(note)
+    def add_note(self, note, etudiant):
+        """Ajout de la note d'un etudiant pour ce cours"""
+        try:
+            self._etudiants_notes[etudiant.identifiant].append(note.note)
+        except KeyError:
+            print("l'etudiant n'est pas inscit a ce cours ...")
 
 def main():
     """Test"""
-    #Etudiant('Jean', 'Paul', 18)
 
 if __name__ == '__main__':
     main()

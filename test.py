@@ -4,10 +4,15 @@ class A:
     """AAA"""
     _static = []
     _list_instance = [] # static
+    c = 2
 
     def __init__(self, x):
         self.x = x
         self.add_self()
+        self.c()
+
+    def c(self):
+        self.c = 4   
     
     def add_static(self, b):
         self._static.append(b)
@@ -42,3 +47,5 @@ print(a)
 
 for x in A._list_instance:
     print(str(x))
+
+print(a.__dict__)

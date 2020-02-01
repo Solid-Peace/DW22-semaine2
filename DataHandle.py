@@ -3,6 +3,11 @@
 et de sortie du programme vers le stockage"""
 
 import os
+import json
+from models.Note import Note
+from models.Etudiant import Etudiant
+from models.Cours import Cours
+
 
 class DataHandle:
     """docstring for DataHandle"""
@@ -51,13 +56,11 @@ class DataHandle:
 
 
     def append_data(self):
-        """ ajoute des données à la fin du fichier """
+        """ ajoute des donnees a la fin du fichier """
 
 
 def main():
     """Test"""
-    data_handler = DataHandle('test')
-    
 
 if __name__ == '__main__':
     main()
